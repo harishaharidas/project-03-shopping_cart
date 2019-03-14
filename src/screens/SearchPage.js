@@ -9,8 +9,13 @@ const abc = require('../jsonFiles/product.json')
 export default class SearchPage extends Component {
   state = {
     display: false,
-    disp: false
+    disp: false,
+    sortVisible: this.props.list
   }
+  setSortVisible = (abc) => {
+    this.props.
+  }
+
   triggerModal() {
     this.setState(prevState => {
       return {
@@ -61,6 +66,8 @@ export default class SearchPage extends Component {
             <SortModal 
             display = { this.state.display }
             onPressingValue={(value)=>this.setState({display:value})}
+            lowToHigh={this.lowToHigh}
+
           />
             <TouchableOpacity style={styles.filter} onPress = { () => this.triggerModal2() } >
               <Icon name='filter-outline' style={styles.filterIcon} />

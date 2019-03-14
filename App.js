@@ -12,12 +12,14 @@ import SearchPage from './src/screens/SearchPage';
 import Home from './src/screens/Home';
 import Cart from './src/screens/Cart';
 
+
 export default class App extends Component {
   render() {
     return (
       // <SearchPage />
       // <Home />
-      <Cart/>
+      // <Cart/>
+      <SearchPage/>
     );
   }
 }
