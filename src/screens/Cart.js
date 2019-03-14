@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, ImageBackground, ScrollView, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import itemImage from '../images/cart1.jpg';
-import Star from '../components/Star'
+import StarRating from '../Components'
 
 export default class Cart extends Component {
     render() {
@@ -58,8 +58,8 @@ export default class Cart extends Component {
                             <View style={styles.specificationDetails}>
                                 <View style={styles.textStyle1}>
                                     <Text style={styles.reviewTextStyle1}> Cobus Bester   </Text>
-                                    <Star
-                                        count="4"
+                                    <StarRating
+                                        iconCount="4"
                                     />
                                 </View>
                                 <View style={styles.textStyle2}>
@@ -71,8 +71,8 @@ export default class Cart extends Component {
                             <View style={styles.specificationDetails}>
                                 <View style={styles.textStyle1}>
                                     <Text style={styles.reviewTextStyle1}> Maria   </Text>
-                                    <Star
-                                        count="5"
+                                    <StarRating
+                                        iconCount="5"
                                     />
                                 </View>
                                 <View style={styles.textStyle2}>
