@@ -11,6 +11,7 @@ export default TabNavigator = createBottomTabNavigator({
   User: User,
   Search: Search,
   Cart: Cart
+  
 },
   {
     defaultNavigationOptions: ({ navigation }) => ({

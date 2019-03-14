@@ -4,11 +4,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import itemImage from '../images/cart1.jpg';
 import StarRating from '../Components/StarRating'
 
+const picker = require('../jsonFiles/product.json')
 export default class Cart extends Component {
     render() {
         return (
 
             <View style={styles.container}>
+               <StatusBar backgroundColor='#F53D3F' />
                 <View style={styles.header}>
                     <TouchableOpacity>
                         <Icon name='arrow-left' style={{ fontSize: 28, paddingRight: 2 }} />

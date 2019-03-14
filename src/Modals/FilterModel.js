@@ -20,15 +20,20 @@ export default class FilterModal extends Component {
       >
         <TouchableOpacity style={{ flex: 1 }} onPress={()=>this.setModalVisible(false)} />
         <View style={{
-          bottom: 0, height: 100, width: '100%',
+          bottom: 0, height: 150, width: '100%',
           alignItems: 'center', backgroundColor: 'white',
         }}
         >
+        <View  style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ paddingVertical: 14, fontSize: 16 }}>
+          SORT BY GENDER
+          </Text>
+        </View>
           <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ paddingVertical: 14, fontSize: 16 }}>SORT BY GENDER : Male</Text>
+            <Text style={{ paddingVertical: 14, fontSize: 16 }}>Male</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ paddingVertical: 14, fontSize: 16 }}>SORT BY GENDER : Female</Text>
+            <Text style={{ paddingVertical: 14, fontSize: 16 }}>Female</Text>
           </TouchableOpacity>
         </View>
       </Modal >

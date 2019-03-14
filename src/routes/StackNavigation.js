@@ -4,17 +4,14 @@ import SearchPage from '../screens/SearchPage';
 import Cart from '../screens/Cart';
 import TabNavigator from './TabNavigatio';
 
-StackNavigator = createStackNavigator(
+export default StackNavigator = createStackNavigator(
   {
     Home: Home,
     SearchPage: SearchPage,
     Cart: Cart,
-    TabNavigator: TabNavigator
   },
   {
-    initialRouteName: "TabNavigator",
+    initialRouteName: "Home",
     headerMode: 'none',
   },
 );
-
-export default AppContainer = createAppContainer(StackNavigator);
