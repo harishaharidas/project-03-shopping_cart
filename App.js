@@ -9,24 +9,15 @@
 
 import React, { Component } from 'react';
 import SearchPage from './src/screens/SearchPage';
-<<<<<<< HEAD
-import Home from './src/screens/Home'
-export default class App extends Component {
-  render() {
-    return (
-      // <SearchPage />
-<Home/>
-=======
-import Cart from './src/screens/Cart';
 import Home from './src/screens/Home';
+import Cart from './src/screens/Cart';
 
 export default class App extends Component {
   render() {
     return (
-      // <Home/>
-      <SearchPage />
-      // <Cart />
->>>>>>> ad20fa8e6f866e31945f5d7c7394922ffafd2097
+      // <SearchPage />
+      // <Home />
+      <Cart/>
     );
   }
 }

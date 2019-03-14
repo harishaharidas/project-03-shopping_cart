@@ -24,7 +24,7 @@ export default class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor="transparent" translucent />
+                <StatusBar backgroundColor='#F53D3F' />
                 <View style={styles.Header}>
                     < TouchableOpacity style={{ flex: 2, }}>
                         <Icon name='menu' style={{ color: 'white', fontSize: 28, paddingLeft: 16 }} />
@@ -56,11 +56,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     Header: {
-        flex: 2,
+        flex: 1,
         flexDirection: "row",
-        backgroundColor: '#F75151',
+        backgroundColor: '#F53D3F',
         width: "100%",
-        paddingTop: 48
+        paddingTop: 24,
+        paddingBottom: 24
     },
     HeaderImage: {
         flex: 4,
