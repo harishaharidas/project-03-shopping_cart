@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, ImageBackground, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import backgroundImage from '../images/backgroundImage.jpg'
-
+import backgroundImage from '../images/backgroundImage.jpg';
+const Product = require('../jsonFiles/Product.json')
 
 export default class Home extends Component {
+   
+
+    listProducts = () => {  
+      Product.itemList.map((data) => {
+            return (
+                <ProductComponent
+                    image={data.image}
+                    title={data.title}
+                    description={data.description}
+                    price={data.price}
+                    rating={data.rating}
+                    category={data.category}
+                />
+            );
+        });
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -25,23 +41,8 @@ export default class Home extends Component {
                     <ImageBackground source={backgroundImage} style={{ width: '100%', height: '100%' }} ></ImageBackground>
                 </View>
                 <View style={styles.Content}>
-                    <View style={styles.contentItems}>
-                        <View style={{ flex: 2, padding: 20 }}></View>
-                        <View style={{ flex: 12, borderColor: 'white', borderBottomColor: 'grey', borderBottomWidth: .5, flexDirection: 'row' }}>
-                            <View style={{ flex: 8 }}>
-                                <Text style={{color:'back',fontSize: 16, fontWeight: '700' }}>Item Name</Text>
-                                <Text style={{fontSize: 14,fontWeight: '200' }}>Lorem Ipsum is simply dummy text of the printing and
-             typesetting...</Text>
-                                <Text style={{fontSize: 14,fontWeight: '200' }}>$ Amount</Text>
+                    {this.listProducts()}
 
-
-                            </View>
-                            < TouchableOpacity style={{ flex: 2,alignItems:'center',justifyContent:'center' }}>
-                                <Icon name='arrow-right' style={{ color: 'blue', fontSize: 20, paddingLeft: 16 }} />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                   
                 </View>
             </View>
         );

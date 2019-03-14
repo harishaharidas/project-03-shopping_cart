@@ -1,0 +1,84 @@
+{
+  "itemList": [
+    {
+      "image": "/url/xdveg.jpg",
+      "title": "Titles One here",
+      "description": "Description details",
+      "price": 123,
+      "rating": "2",
+      "category": "M"
+    },
+    {
+      "image": "/url/xdveg.jpg",
+      "title": "Titles One here",
+      "description": "Description details",
+      "price": 123,
+      "rating": "3",
+      "category": "F"
+    },
+    {
+      "image": "/url/xdveg.jpg",
+      "title": "Titles One here",
+      "description": "Description details",
+      "price": 123,
+      "rating": "2",
+      "category": "M"
+    },
+    {
+      "image": "/url/xdveg.jpg",
+      "title": "Titles One here",
+      "description": "Description details",
+      "price": 123,
+      "rating": "3",
+      "category": "F"
+    },
+    {
+      "image": "/url/xdveg.jpg",
+      "title": "Titles One here",
+      "description": "Description details",
+      "price": 123,
+      "rating": "2",
+      "category": "M"
+    },
+    {
+      "image": "/url/xdveg.jpg",
+      "title": "Titles One here",
+      "description": "Description details",
+      "price": 123,
+      "rating": "3",
+      "category": "F"
+    },
+    {
+      "image": "/url/xdveg.jpg",
+      "title": "Titles One here",
+      "description": "Description details",
+      "price": 123,
+      "rating": "2",
+      "category": "M"
+    },
+    {
+      "image": "/url/xdveg.jpg",
+      "title": "Titles One here",
+      "description": "Description details",
+      "price": 123,
+      "rating": "3",
+      "category": "F"
+    },
+    {
+      "image": "/url/xdveg.jpg",
+      "title": "Titles One here",
+      "description": "Description details",
+      "price": 123,
+      "rating": "2",
+      "category": "M"
+    },
+    {
+      "image": "/url/xdveg.jpg",
+      "title": "Titles One here",
+      "description": "Description details",
+      "price": 123,
+      "rating": "3",
+      "category": "F"
+    }
+  ]
+}

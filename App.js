@@ -9,13 +9,13 @@
 
 import React, { Component } from 'react';
 import Home from './src/screens/Home';
-
+import Cart from './src/screens/Cart'
 
 export default class App extends Component {
   render() {
     return (         
         <Home/>
-       
+      //  <Cart/>
     );
   }
 }
