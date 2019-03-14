@@ -11,13 +11,16 @@ export default class ProductComponent extends Component {
       <View style={{ height: 110, flexDirection: 'row' }}>
         <View>
           <Image
-            source={{ uri: this.props.productThumbnail}}
+            source={{ uri: this.props.productThumbnail }}
             style={styles.image} />
         </View>
         <View style={styles.productDetails}>
           <View style={{ alignItems: 'flex-start', width: 220 }}>
             <Text style={styles.productTitleText}>{this.props.productTitle}</Text>
-            <Text>{this.props.productDiscription}</Text>
+            <Text>{((this.props.productDiscription).length > 55) ?
+              (((this.props.productDiscription).substring(0, 55 - 3)) + '...') :
+              this.props.productDiscription}
+            </Text>
             <View style={{ flexDirection: 'row' }}>
               <Text>{"$ "}{this.props.price}</Text>
               <StarRating
