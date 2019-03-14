@@ -4,13 +4,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Home from '../screens/Home';
 import User from '../screens/User';
 import Search from '../screens/SearchPage';
-import Cart from '../screens/Cart';
+import DetailedPage from '../screens/DetailedPage';
 
 export default TabNavigator = createBottomTabNavigator({
   Home: Home,
   User: User,
   Search: Search,
-  Cart: Cart
+  DetailedPage: DetailedPage
   
 },
   {
@@ -25,7 +25,7 @@ export default TabNavigator = createBottomTabNavigator({
           iconName = `account${focused ? '' : '-outline'}`;
         } else if (routeName === 'Search') {
           iconName = `account-search${focused ? '' : '-outline'}`;
-        } else if (routeName === 'Cart') {
+        } else if (routeName === 'DetailedPage') {
           iconName = `cart${focused ? '' : '-outline'}`;
         }
         return <IconComponent name={iconName} size={25} color={tintColor} />;
