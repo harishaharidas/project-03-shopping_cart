@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, ImageBackground, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import backgroundImage from '../images/backgroundImage.jpg';
-const Product = require('../jsonFiles/Product.json')
+import ProductComponent from '../Components/ProductComponent'
+const Product = require('../jsonFiles/product.json')
 
 export default class Home extends Component {
    
 
     listProducts = () => {  
-      Product.itemList.map((data) => {
+      return Product.itemList.map((data) => {
             return (
                 <ProductComponent
-                    image={data.image}
-                    title={data.title}
-                    description={data.description}
-                    price={data.price}
-                    rating={data.rating}
-                    category={data.category}
+                productThumbnail={data.image}
+                productTitle={data.title}
+                productDiscription={data.description}
+                price={data.price}  
+                    
                 />
             );
         });
@@ -24,7 +24,7 @@ export default class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor="transparent" translucent />
+                <StatusBar backgroundColor='#F53D3F' />
                 <View style={styles.Header}>
                     < TouchableOpacity style={{ flex: 2, }}>
                         <Icon name='menu' style={{ color: 'white', fontSize: 28, paddingLeft: 16 }} />
@@ -56,11 +56,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     Header: {
-        flex: 2,
+        flex: 1,
         flexDirection: "row",
-        backgroundColor: '#F75151',
+        backgroundColor: '#F53D3F',
         width: "100%",
-        paddingTop: 48
+        paddingTop: 24,
+        paddingBottom: 24
     },
     HeaderImage: {
         flex: 4,
