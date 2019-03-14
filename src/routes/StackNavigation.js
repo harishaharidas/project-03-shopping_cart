@@ -1,16 +1,20 @@
-import { createStackNavigator } from "react-navigation";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import Home from '../screens/Home';
 import SearchPage from '../screens/SearchPage';
-import Cart from '../screens/Cart'
+import Cart from '../screens/Cart';
+import TabNavigator from './TabNavigatio';
 
-export default  StackNavigator = createStackNavigator(
+StackNavigator = createStackNavigator(
   {
     Home: Home,
     SearchPage: SearchPage,
     Cart: Cart,
+    TabNavigator: TabNavigator
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "TabNavigator",
     headerMode: 'none',
   },
 );
+
+export default AppContainer = createAppContainer(StackNavigator);

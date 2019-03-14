@@ -11,13 +11,15 @@ import React, { Component } from 'react';
 import SearchPage from './src/screens/SearchPage';
 import Cart from './src/screens/Cart';
 import Home from './src/screens/Home';
+import AppContainer from './src/routes/StackNavigation'
 
 export default class App extends Component {
   render() {
     return (
       // <Home/>
-      <SearchPage />
+      // <SearchPage />
       // <Cart />
+      <AppContainer/>
     );
   }
 }

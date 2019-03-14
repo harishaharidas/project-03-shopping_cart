@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, ImageBackground, ScrollView, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import itemImage from '../images/cart1.jpg';
-import StarRating from '../Components'
+import StarRating from '../Components/StarRating'
 
 export default class Cart extends Component {
     render() {

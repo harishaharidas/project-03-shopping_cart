@@ -11,14 +11,14 @@ export default class SearchPage extends Component {
     display: false,
     disp: false
   }
-  triggerModal() {
+  triggerModalForSort() {
     this.setState(prevState => {
       return {
         display: true,
       }
     });
   }
-  triggerModal2() {
+  triggerModalForFilter() {
     this.setState(prevState => {
       return {
         disp: true
@@ -54,7 +54,7 @@ export default class SearchPage extends Component {
             </View>
           </View>
           <View style={styles.contentAlter}>
-            <TouchableOpacity style={styles.sort} onPress = { () => this.triggerModal() }>
+            <TouchableOpacity style={styles.sort} onPress = { () => this.triggerModalForSort() }>
               <Icon name='sort' style={styles.sortIcon} />
               <Text style={{ color: 'red' }}>Sort</Text>
             </TouchableOpacity>
@@ -62,7 +62,7 @@ export default class SearchPage extends Component {
             display = { this.state.display }
             onPressingValue={(value)=>this.setState({display:value})}
           />
-            <TouchableOpacity style={styles.filter} onPress = { () => this.triggerModal2() } >
+            <TouchableOpacity style={styles.filter} onPress = { () => this.triggerModalForFilters() } >
               <Icon name='filter-outline' style={styles.filterIcon} />
               <Text style={{ color: 'red' }}>Filter</Text>
             </TouchableOpacity>

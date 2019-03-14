@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, ImageBackground, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import backgroundImage from '../images/backgroundImage.jpg';
-const Product = require('../jsonFiles/Product.json')
+import ProductComponent from '../Components/ProductComponent';
+const Product = require('../jsonFiles/product.json');
 
 export default class Home extends Component {
-   
 
-    listProducts = () => {  
-      Product.itemList.map((data) => {
+
+    listProducts = () => {
+        Product.itemList.map((data) => {
             return (
                 <ProductComponent
                     image={data.image}
@@ -24,15 +25,15 @@ export default class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor="transparent" translucent />
+                <StatusBar backgroundColor='#F53D3F' />
                 <View style={styles.Header}>
-                    < TouchableOpacity style={{ flex: 2, }}>
+                    < TouchableOpacity style={{ flex: 2, }} onPress={() => this.props.navigation.navigate('SearchPage')}>
                         <Icon name='menu' style={{ color: 'white', fontSize: 28, paddingLeft: 16 }} />
                     </TouchableOpacity>
                     <TouchableOpacity style={{ flex: 8, }}>
                         <Text style={{ color: 'white', fontSize: 24, fontWeight: "bold" }}>Home</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ flex: 2, }}>
+                    <TouchableOpacity style={{ flex: 2, }} onPress={() => this.props.navigation.navigate('Cart')}>
                         <Icon name='cart' style={{ color: 'white', fontSize: 28, paddingRight: 2 }} />
                     </TouchableOpacity>
 
@@ -42,7 +43,6 @@ export default class Home extends Component {
                 </View>
                 <View style={styles.Content}>
                     {this.listProducts()}
-
                 </View>
             </View>
         );
