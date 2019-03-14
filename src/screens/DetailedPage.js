@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import itemImage from '../images/cart1.jpg';
 import StarRating from '../Components/StarRating'
 
+const picker = require('../jsonFiles/product.json')
 export default class Cart extends Component {
     render() {
         return (

@@ -5,20 +5,20 @@ import ProductComponent from '../Components/ProductComponent';
 import SortModal from '../Modals/SortModal';
 import FilterModal from '../Modals/FilterModel';
 
-const abc = require('../jsonFiles/product.json')
+const picker = require('../jsonFiles/product.json')
 export default class SearchPage extends Component {
   state = {
     display: false,
     disp: false
   }
-  triggerModal() {
+  triggerModalForSort() {
     this.setState(prevState => {
       return {
         display: true,
       }
     });
   }
-  triggerModal2() {
+  triggerModalForFilter() {
     this.setState(prevState => {
       return {
         disp: true
@@ -27,7 +27,7 @@ export default class SearchPage extends Component {
   }
 
   aFunction = () => {
-    return abc.itemList.map((data) => {
+    return picker.itemList.map((data) => {
       return (
         <ProductComponent
           productThumbnail={data.image}
@@ -40,6 +40,7 @@ export default class SearchPage extends Component {
   }
 
   render() {
+    // alert(picker.itemList[0].title)
     return (
       <View style={styles.container} >
         <StatusBar backgroundColor='#F53D3F' />
@@ -54,7 +55,7 @@ export default class SearchPage extends Component {
             </View>
           </View>
           <View style={styles.contentAlter}>
-            <TouchableOpacity style={styles.sort} onPress = { () => this.triggerModal() }>
+            <TouchableOpacity style={styles.sort} onPress = { () => this.triggerModalForSort() }>
               <Icon name='sort' style={styles.sortIcon} />
               <Text style={{ color: 'red' }}>Sort</Text>
             </TouchableOpacity>
@@ -62,7 +63,7 @@ export default class SearchPage extends Component {
             display = { this.state.display }
             onPressingValue={(value)=>this.setState({display:value})}
           />
-            <TouchableOpacity style={styles.filter} onPress = { () => this.triggerModal2() } >
+            <TouchableOpacity style={styles.filter} onPress = { () => this.triggerModalForFilter() } >
               <Icon name='filter-outline' style={styles.filterIcon} />
               <Text style={{ color: 'red' }}>Filter</Text>
             </TouchableOpacity>
