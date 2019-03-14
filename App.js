@@ -8,15 +8,12 @@
  */
 
 import React, { Component } from 'react';
-import Home from './src/screens/Home';
-import Cart from './src/screens/Cart'
+import SearchPage from './src/screens/SearchPage';
 
 export default class App extends Component {
   render() {
-    return (         
-        <Home/>
-      //  <Cart/>
+    return (
+      <SearchPage />
     );
   }
 }
-
