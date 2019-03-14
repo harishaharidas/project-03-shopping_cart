@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, ImageBackground, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import backgroundImage from '../images/backgroundImage.jpg';
-const Product = require('../jsonFiles/Product.json')
+import ProductComponent from '../Components/ProductComponent'
+const Product = require('../jsonFiles/product.json')
 
 export default class Home extends Component {
    
 
     listProducts = () => {  
-      Product.itemList.map((data) => {
+      return Product.itemList.map((data) => {
             return (
                 <ProductComponent
-                    image={data.image}
-                    title={data.title}
-                    description={data.description}
-                    price={data.price}
-                    rating={data.rating}
-                    category={data.category}
+                productThumbnail={data.image}
+                productTitle={data.title}
+                productDiscription={data.description}
+                price={data.price}  
+                    
                 />
             );
         });
