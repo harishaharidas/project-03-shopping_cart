@@ -10,16 +10,16 @@
 import React, { Component } from 'react';
 import SearchPage from './src/screens/SearchPage';
 import Home from './src/screens/Home';
-import Cart from './src/screens/Cart';
+import AppContainer from './src/routes/DrawerNavigation'
 
 
 export default class App extends Component {
   render() {
     return (
+      // <Home/>
       // <SearchPage />
-      // <Home />
-      // <Cart/>
-      <SearchPage/>
+      // <Cart />
+      <AppContainer/>
     );
   }
 }

@@ -4,16 +4,15 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ProductComponent from '../Components/ProductComponent';
 import SortModal from '../Modals/SortModal';
 import FilterModal from '../Modals/FilterModel';
-
 const abc = require('../jsonFiles/product.json')
+
 export default class SearchPage extends Component {
   state = {
     display: false,
     disp: false,
-    sortVisible: this.props.list
-  }
-  setSortVisible = (abc) => {
-    this.props.
+    abcd: abc.itemList,
+    value: "male"
+    // priceValue: []
   }
 
   triggerModal() {
@@ -32,7 +31,7 @@ export default class SearchPage extends Component {
   }
 
   aFunction = () => {
-    return abc.itemList.map((data) => {
+    return this.state.abcd.map((data) => {
       return (
         <ProductComponent
           productThumbnail={data.image}
@@ -43,6 +42,40 @@ export default class SearchPage extends Component {
       );
     });
   }
+
+  lowToHighSort = () => {
+
+    var priceValue = this.state.abcd.sort((a, b) => {
+      return a.price - b.price;
+    })
+    this.setState(prevState => {
+      return {
+        abcd: priceValue
+      }
+    });
+  }
+
+  highToLowSort = () => {
+
+    var priceValue = this.state.abcd.sort((a, b) => {
+      return b.price - a.price;
+    })
+    this.setState(prevState => {
+      return {
+        abcd: priceValue
+      }
+    });
+  }
+
+  //  filterMale ({this.abcd}, gender) {
+  //     return arr.filter((category) =>{
+  //         return gender.toLowerCase().indexOf(query.toLowerCase()) > -1;
+  //     })
+  //   }
+  gender(obj) {
+    return obj !== undefined && typeof(obj) === 'string' && !isNaN(obj);
+  }
+
 
   render() {
     return (
@@ -59,24 +92,26 @@ export default class SearchPage extends Component {
             </View>
           </View>
           <View style={styles.contentAlter}>
-            <TouchableOpacity style={styles.sort} onPress = { () => this.triggerModal() }>
+            <TouchableOpacity style={styles.sort} onPress={() => this.triggerModal()}>
               <Icon name='sort' style={styles.sortIcon} />
               <Text style={{ color: 'red' }}>Sort</Text>
             </TouchableOpacity>
-            <SortModal 
-            display = { this.state.display }
-            onPressingValue={(value)=>this.setState({display:value})}
-            lowToHigh={this.lowToHigh}
+            <SortModal
+              display={this.state.display}
+              onPressingValue={(value) => this.setState({ display: value })}
+              lowToHigh={this.lowToHighSort}
+              highToLow={this.highToLowSort}
 
-          />
-            <TouchableOpacity style={styles.filter} onPress = { () => this.triggerModal2() } >
+            />
+            <TouchableOpacity style={styles.filter} onPress={() => this.triggerModal2()} >
               <Icon name='filter-outline' style={styles.filterIcon} />
               <Text style={{ color: 'red' }}>Filter</Text>
             </TouchableOpacity>
-            <FilterModal 
-            display = { this.state.disp }
-            onPressingValue={(value)=>this.setState({disp:value})}
-          />
+            <FilterModal
+              display={this.state.disp}
+              onPressingValue={(value) => this.setState({ disp: value })}
+              male={this.filterMale}
+            />
           </View>
         </View>
         <ScrollView style={styles.contentsection}>
