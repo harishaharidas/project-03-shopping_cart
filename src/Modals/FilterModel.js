@@ -29,7 +29,7 @@ export default class FilterModal extends Component {
           SORT BY GENDER
           </Text>
         </View>
-          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={this.props.male}>
             <Text style={{ paddingVertical: 14, fontSize: 16 }}>Male</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}>
