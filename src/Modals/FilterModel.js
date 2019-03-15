@@ -32,7 +32,7 @@ export default class FilterModal extends Component {
           <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={this.props.male}>
             <Text style={{ paddingVertical: 14, fontSize: 16 }}>Male</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={this.props.female}>
             <Text style={{ paddingVertical: 14, fontSize: 16 }}>Female</Text>
           </TouchableOpacity>
         </View>
