@@ -7,7 +7,7 @@ import StarRating from '../Components/StarRating';
 class ProductComponent extends Component {
   render() {
     return (
-      <View style={{ height: 110, flexDirection: 'row', backgroundColor:'white' }}>
+      <View style={styles.container}>
         <View>
           <Image
             source={{ uri: this.props.productThumbnail }}
@@ -16,11 +16,12 @@ class ProductComponent extends Component {
         <TouchableOpacity
           style={styles.productDetails}
           onPress={() => this.props.navigation.navigate('DetailedPage', {
-            productThumbnail:this.props.productThumbnail,
-            productTitle:this.props.productTitle,
-            productDiscription:this.props.productDiscription,
-            price:this.props.price,
-            // price:this.props.price,
+            productThumbnail: this.props.productThumbnail,
+            productTitle: this.props.productTitle,
+            productDiscription: this.props.productDiscription,
+            price: this.props.price,
+            star: this.props.rating,
+            category:this.props.category
           })}>
           <View style={{ alignItems: 'flex-start', width: 220 }}>
             <Text style={styles.productTitleText}>{this.props.productTitle}</Text>
@@ -45,6 +46,11 @@ class ProductComponent extends Component {
 export default withNavigation(ProductComponent);
 
 const styles = StyleSheet.create({
+  container: {
+    height: 110,
+    flexDirection: 'row',
+    backgroundColor: 'white'
+  },
   image: {
     height: 70,
     width: 70,

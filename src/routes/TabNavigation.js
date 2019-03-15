@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Home from '../screens/Home';
 import User from '../screens/User';
 import Search from '../screens/SearchPage';
-import DetailedPage from '../screens/DetailedPage';
 import Cart from '../screens/Cart'
 
 export default TabNavigator = createBottomTabNavigator({
@@ -12,7 +11,6 @@ export default TabNavigator = createBottomTabNavigator({
   User: User,
   Search: Search,
   Cart:Cart,
-  // DetailedPage:DetailedPage
 },
   {
     defaultNavigationOptions: ({ navigation }) => ({

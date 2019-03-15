@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, ImageBackground, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, ScrollView, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import itemImage from '../images/cart1.jpg';
 import StarRating from '../Components/StarRating'
 
-const picker = require('../jsonFiles/product.json')
 export default class DetailedPage extends Component {
     constructor(props) {
         super(props);
@@ -23,15 +21,16 @@ export default class DetailedPage extends Component {
         const productImage = navigation.getParam('productThumbnail', 'NO-ID');
         const productDiscription = navigation.getParam('productDiscription', 'NO-ID');
         const price = navigation.getParam('price', 'NO-ID');
+        const star = navigation.getParam('star', 'NO-ID');
+        const category = navigation.getParam('category', 'NO-ID');
         return (
-
             <View style={styles.container}>
                 <StatusBar backgroundColor='#F53D3F' />
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => this.props.navigation.goBack(null)}>
                         <Icon name='arrow-left' style={{ fontSize: 28, paddingRight: 2 }} />
                     </TouchableOpacity>
-                    <Text style={{ fontSize: 24, fontWeight: "bold", paddingLeft: 40 }}>
+                    <Text style={styles.headerProductTitle}>
                         {productTitle}
                     </Text>
                 </View>
@@ -39,20 +38,18 @@ export default class DetailedPage extends Component {
                     <ScrollView contentContainerStyle={styles.contentContainer}>
                         <View style={styles.itemDetails}>
                             <View style={styles.imageStyle}>
-                                <Image source={{ uri: (productImage) }} resizeMode='stretch' style={{ width: 360, height: 300, resizeMode: 'stretch' }} />
+                                <Image source={{ uri: (productImage) }} resizeMode='stretch' style={styles.productImage} />
                             </View>
-
                             <View style={styles.itemHeader}>
-                                <Text style={{ fontSize: 20, fontWeight: "500", color: 'black', paddingRight: 20 }}> Woo Single Awesome</Text>
-                                <TouchableOpacity><Text style={styles.itemSubHeader}>{picker.itemList[0].category}</Text></TouchableOpacity>
+                                <Text style={styles.discriptionHeading}> Woo Single Awesome</Text>
+                                <TouchableOpacity><Text style={styles.itemSubHeader}>{category}</Text></TouchableOpacity>
                                 <TouchableOpacity style={{ flexDirection: 'row' }}>
                                     <Text style={styles.itemSubHeader}>
-                                        {picker.itemList[0].rating}{" / 5"}
+                                        {star}{" / 5"}
                                     </Text>
                                 </TouchableOpacity>
                             </View>
-
-                            <Text style={{ color: 'black', fontSize: 14, textAlign: 'justify', padding: 12 }}>
+                            <Text style={styles.productDiscriptionText}>
                                 {productDiscription}
                             </Text>
                         </View>
@@ -84,7 +81,6 @@ export default class DetailedPage extends Component {
                                     <Text style={styles.reviewTextStyle2}>  It is a long established fact that a
                                 reader will be distracted.  </Text>
                                 </View>
-
                             </View>
                             <View style={styles.specificationDetails}>
                                 <View style={styles.textStyle1}>
@@ -101,15 +97,15 @@ export default class DetailedPage extends Component {
                         </View>
                     </ScrollView>
                 </View>
-                <TouchableOpacity style={styles.iconStyle}  onPress={() => this.props.navigation.navigate('Cart')}>
+                <TouchableOpacity style={styles.iconStyle} onPress={() => this.props.navigation.navigate('Cart')}>
                     <Icon name='cart' style={{ color: 'white', fontSize: 28 }} />
                 </TouchableOpacity>
                 <View style={styles.footer}>
                     <TouchableOpacity
                         onPress={() => this.onPressAddToCart()}
-                        style={{ borderColor: '#E85151', borderWidth: 2, padding: 16, borderRadius: 4, justifyContent: 'center', flexDirection: 'row' }}>
-                        <Icon name='basket' style={{ color: '#E85151', fontSize: 28, paddingRight: 2 }} />
-                        <Text style={{ color: "#E85151", fontSize: 20, fontWeight: '500', }}>{this.state.content}{price}</Text>
+                        style={styles.addCart}>
+                        <Icon name='basket' style={styles.addCartIcon} />
+                        <Text style={styles.addCartText}>{this.state.content}{price}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -121,7 +117,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-
     header: {
         flex: 2,
         width: "100%",
@@ -131,7 +126,6 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         borderColor: '#F0F0F0',
         borderBottomWidth: 1,
-
     },
     iconStyle: {
         position: 'absolute',
@@ -144,6 +138,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    headerProductTitle: {
+        fontSize: 24,
+        fontWeight: "bold",
+        paddingLeft: 40,
+        color: 'black'
+    },
+    productImage: {
+        width: 360,
+        height: 300,
+        resizeMode: 'stretch'
+    },
+    discriptionHeading: {
+        fontSize: 20,
+        fontWeight: "500",
+        color: 'black',
+        paddingRight: 20
+    },
     main: {
         flex: 20,
         width: "100%",
@@ -154,17 +165,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#F0F0F0',
         alignItems: 'center',
         justifyContent: 'center',
-        // paddingTop: 72,
-        // paddingBottom: 72,
         borderTopEndRadius: 4,
         borderTopStartRadius: 4
     },
-
+    productDiscriptionText: {
+        color: 'black',
+        fontSize: 14,
+        textAlign: 'justify',
+        padding: 12
+    },
     itemHeader: {
         flex: 1,
         flexDirection: 'row',
         padding: 10,
-        paddingTop: 24
+        paddingTop: 24,
     },
     itemSubHeader: {
         fontSize: 14,
@@ -178,7 +192,6 @@ const styles = StyleSheet.create({
         marginRight: 10,
         paddingLeft: 15,
         paddingRight: 15
-
     },
     commonHeader: {
         backgroundColor: '#F0F0F0',
@@ -198,7 +211,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginTop: 12,
         paddingBottom: 16,
-
     },
     specificationDetails: {
         flex: 1,
@@ -206,13 +218,30 @@ const styles = StyleSheet.create({
         padding: 12,
         paddingRight: 20
     },
+    addCart: {
+        borderColor: '#E85151',
+        borderWidth: 2,
+        padding: 16,
+        borderRadius: 4,
+        justifyContent: 'center',
+        flexDirection: 'row'
+    },
+    addCartIcon: {
+        color: '#E85151',
+        fontSize: 28,
+        paddingRight: 2
+    },
+    addCartText: {
+        color: "#E85151",
+        fontSize: 20,
+        fontWeight: '500',
+    },
     textStyle1: {
         fontSize: 14,
         fontWeight: "400",
         color: 'black',
         padding: 12,
         flex: 4,
-
     },
     textStyle2: {
         fontSize: 14,
@@ -220,9 +249,7 @@ const styles = StyleSheet.create({
         color: 'black',
         padding: 12,
         flex: 8,
-
     },
-
     reviewTextStyle1: {
 
         color: 'black',
@@ -234,7 +261,6 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     contentContainer: {
-
         backgroundColor: 'white'
     },
     footer: {
@@ -254,6 +280,4 @@ const styles = StyleSheet.create({
         borderColor: '#F0F0F0',
         backgroundColor: 'white',
     },
-
-
 });

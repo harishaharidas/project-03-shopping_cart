@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-
+import { View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class StarRating extends Component {
@@ -8,12 +7,11 @@ export default class StarRating extends Component {
     const tester = [];
     for (let i = 0; i < num; i++) {
       tester.push(
-        <Icon name='star' style={{color:'#D3AA34', paddingTop:2, fontSize:14,paddingLeft:2}} />
+        <Icon name='star' style={styles.iconStyle} />
       );
     }
     return tester;
   }
-
   render() {
     return (
       <View style={{ flexDirection: 'row' }}>
@@ -22,3 +20,11 @@ export default class StarRating extends Component {
     );
   }
 }
+const styles = StyleSheet.create({
+  iconStyle: {
+    color: '#D3AA34',
+    paddingTop: 2,
+    fontSize: 14,
+    paddingLeft: 2
+  }
+})
