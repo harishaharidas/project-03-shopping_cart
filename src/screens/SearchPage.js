@@ -11,7 +11,7 @@ export default class SearchPage extends Component {
     display: false,
     disp: false,
     abcd: abc.itemList,
-    value: "male"
+    
     // priceValue: []
   }
 
@@ -68,15 +68,33 @@ export default class SearchPage extends Component {
     });
   }
 
-  //  filterMale ({this.abcd}, gender) {
-  //     return arr.filter((category) =>{
-  //         return gender.toLowerCase().indexOf(query.toLowerCase()) > -1;
-  //     })
-  //   }
-  gender(obj) {
-    return obj !== undefined && typeof(obj) === 'string' && !isNaN(obj);
+  filterMale =()=> {
+    checkFun=(i) => {
+      var value="Male";
+       return i.category==value;
+    }
+    var filtered = this.state.abcd.filter(checkFun);
+    this.setState(prevState => {
+      return {
+        abcd: filtered,
+        disp:false
+      }
+    });
   }
-
+  filterFemale =()=> {
+    checkFun=(i) => {
+      var value="Female";
+       return i.category==value;
+    }
+    var filtered = this.state.abcd.filter(checkFun);
+    this.setState(prevState => {
+      return {
+        abcd: filtered,
+        disp:false
+      }
+    });
+  }
+  
 
   render() {
     return (
@@ -115,6 +133,7 @@ export default class SearchPage extends Component {
               display={this.state.disp}
               onPressingValue={(value) => this.setState({ disp: value })}
               male={this.filterMale}
+              female={this.filterFemale}
             />
           </View>
         </View>
