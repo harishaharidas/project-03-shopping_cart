@@ -11,8 +11,6 @@ export default class SearchPage extends Component {
     display: false,
     disp: false,
     abcd: abc.itemList,
-    
-    // priceValue: []
   }
 
   triggerModal() {
@@ -29,8 +27,7 @@ export default class SearchPage extends Component {
       }
     });
   }
-
-  aFunction = () => {
+  displayConntent = () => {
     return this.state.abcd.map((data) => {
       return (
         <ProductComponent
@@ -38,62 +35,60 @@ export default class SearchPage extends Component {
           productTitle={data.title}
           productDiscription={data.description}
           price={data.price}
-          iconCount={data.rating} />
+          iconCount={data.rating}
+          rating={data.rating}
+          category={data.category} />
       );
     });
   }
-
   lowToHighSort = () => {
-
     var priceValue = this.state.abcd.sort((a, b) => {
       return a.price - b.price;
     })
     this.setState(prevState => {
       return {
-        abcd: priceValue
+        abcd: priceValue,
+        display: false
       }
     });
   }
-
   highToLowSort = () => {
-
     var priceValue = this.state.abcd.sort((a, b) => {
       return b.price - a.price;
     })
     this.setState(prevState => {
       return {
-        abcd: priceValue
+        abcd: priceValue,
+        display: false
       }
     });
   }
-
-  filterMale =()=> {
-    checkFun=(i) => {
-      var value="Male";
-       return i.category==value;
+  filterMale = () => {
+    checkFun = (i) => {
+      var value = "Male";
+      return i.category == value;
     }
     var filtered = this.state.abcd.filter(checkFun);
     this.setState(prevState => {
       return {
         abcd: filtered,
-        disp:false
+        disp: false
       }
     });
   }
-  filterFemale =()=> {
-    checkFun=(i) => {
-      var value="Female";
-       return i.category==value;
+  filterFemale = () => {
+    checkFun = (i) => {
+      var value = "Female";
+      return i.category == value;
     }
     var filtered = this.state.abcd.filter(checkFun);
     this.setState(prevState => {
       return {
         abcd: filtered,
-        disp:false
+        disp: false
       }
     });
   }
-  
 
   render() {
     return (
@@ -102,7 +97,7 @@ export default class SearchPage extends Component {
         <View style={{ height: 120 }}>
           <View style={styles.headerInputsection}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <TouchableOpacity><Icon name='arrow-left' style={styles.goBack} /></TouchableOpacity>
+              <TouchableOpacity><Icon name='arrow-left' style={styles.goBack}  onPress={() => this.props.navigation.goBack(null)}/></TouchableOpacity>
               <View style={styles.search}>
                 <TextInput placeholder='Search a product' style={styles.headerInputsection} />
                 <Icon name='magnify' style={styles.searchIcon} />
@@ -134,7 +129,7 @@ export default class SearchPage extends Component {
           </View>
         </View>
         <ScrollView style={styles.contentsection}>
-          {this.aFunction()}
+          {this.displayConntent()}
         </ScrollView>
       </View >
     );

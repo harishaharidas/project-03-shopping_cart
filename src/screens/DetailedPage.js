@@ -1,43 +1,56 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar, ImageBackground, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, ScrollView, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import itemImage from '../images/cart1.jpg';
 import StarRating from '../Components/StarRating'
 
-const picker = require('../jsonFiles/product.json')
-export default class Cart extends Component {
+export default class DetailedPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            content: ' ADD TO CART FOR $ ',
+        }
+    }
+    onPressAddToCart = () => {
+        this.setState({
+            content: ' ADDED TO CART'
+        });
+    }
     render() {
+        const { navigation } = this.props;
+        const productTitle = navigation.getParam('productTitle', 'NO-ID');
+        const productImage = navigation.getParam('productThumbnail', 'NO-ID');
+        const productDiscription = navigation.getParam('productDiscription', 'NO-ID');
+        const price = navigation.getParam('price', 'NO-ID');
+        const star = navigation.getParam('star', 'NO-ID');
+        const category = navigation.getParam('category', 'NO-ID');
         return (
-
             <View style={styles.container}>
-               <StatusBar backgroundColor='#F53D3F' />
+                <StatusBar backgroundColor='#F53D3F' />
                 <View style={styles.header}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.goBack(null)}>
                         <Icon name='arrow-left' style={{ fontSize: 28, paddingRight: 2 }} />
                     </TouchableOpacity>
-                    <Text style={{ fontSize: 24, fontWeight: "bold", paddingLeft: 40 }}>
-                        Woo Single Awesome
-                </Text>
+                    <Text style={styles.headerProductTitle}>
+                        {productTitle}
+                    </Text>
                 </View>
                 <View style={styles.main}>
                     <ScrollView contentContainerStyle={styles.contentContainer}>
                         <View style={styles.itemDetails}>
                             <View style={styles.imageStyle}>
-                                <Image source={itemImage} style={{ width: 260, height: 200, resizeMode: 'stretch' }} />
+                                <Image source={{ uri: (productImage) }} resizeMode='stretch' style={styles.productImage} />
                             </View>
-
                             <View style={styles.itemHeader}>
-                                <Text style={{ fontSize: 20, fontWeight: "500", color: 'black', paddingRight: 20 }}> Woo Single Awesome</Text>
-                                <TouchableOpacity><Text style={styles.itemSubHeader}>Musics</Text></TouchableOpacity>
-                                <TouchableOpacity><Text style={styles.itemSubHeader}>Singles</Text></TouchableOpacity>
+                                <Text style={styles.discriptionHeading}> Woo Single Awesome</Text>
+                                <TouchableOpacity><Text style={styles.itemSubHeader}>{category}</Text></TouchableOpacity>
+                                <TouchableOpacity style={{ flexDirection: 'row' }}>
+                                    <Text style={styles.itemSubHeader}>
+                                        {star}{" / 5"}
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
-
-                            <Text style={{ color: 'black', fontSize: 12, textAlign: 'justify', padding: 12 }}>
-                                It is a long established fact that a reader will be distracted by the readable
-                                content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                 that it has a more-or-less normal distribution of letters, as opposed to using
-                                 'Content here, content here', making it look like readable English. Many desktop
-                                 publishing packages and web page editors now use Lorem Ipsum as their default model text.
+                            <Text style={styles.productDiscriptionText}>
+                                {productDiscription}
                             </Text>
                         </View>
                         <View style={styles.specification}>
@@ -68,7 +81,6 @@ export default class Cart extends Component {
                                     <Text style={styles.reviewTextStyle2}>  It is a long established fact that a
                                 reader will be distracted.  </Text>
                                 </View>
-
                             </View>
                             <View style={styles.specificationDetails}>
                                 <View style={styles.textStyle1}>
@@ -85,13 +97,15 @@ export default class Cart extends Component {
                         </View>
                     </ScrollView>
                 </View>
-                <TouchableOpacity style={styles.iconStyle}>
+                <TouchableOpacity style={styles.iconStyle} onPress={() => this.props.navigation.navigate('Cart')}>
                     <Icon name='cart' style={{ color: 'white', fontSize: 28 }} />
                 </TouchableOpacity>
                 <View style={styles.footer}>
-                    <TouchableOpacity style={{ borderColor: '#E85151', borderWidth: 2, padding: 16, borderRadius: 4, justifyContent: 'center', flexDirection: 'row' }}>
-                        <Icon name='basket' style={{ color: '#E85151', fontSize: 28, paddingRight: 2 }} />
-                        <Text style={{ color: "#E85151", fontSize: 20, fontWeight: '500', }}>{' '}ADD TO CART FOR $ 2</Text>
+                    <TouchableOpacity
+                        onPress={() => this.onPressAddToCart()}
+                        style={styles.addCart}>
+                        <Icon name='basket' style={styles.addCartIcon} />
+                        <Text style={styles.addCartText}>{this.state.content}{price}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -103,17 +117,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-
     header: {
         flex: 2,
         width: "100%",
         flexDirection: "row",
         backgroundColor: "#F5F5F5",
         padding: 10,
-        paddingTop: 24,
+        paddingVertical: 20,
         borderColor: '#F0F0F0',
         borderBottomWidth: 1,
-
     },
     iconStyle: {
         position: 'absolute',
@@ -126,6 +138,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    headerProductTitle: {
+        fontSize: 24,
+        fontWeight: "bold",
+        paddingLeft: 40,
+        color: 'black'
+    },
+    productImage: {
+        width: 360,
+        height: 300,
+        resizeMode: 'stretch'
+    },
+    discriptionHeading: {
+        fontSize: 20,
+        fontWeight: "500",
+        color: 'black',
+        paddingRight: 20
+    },
     main: {
         flex: 20,
         width: "100%",
@@ -136,17 +165,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#F0F0F0',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 72,
-        paddingBottom: 72,
         borderTopEndRadius: 4,
         borderTopStartRadius: 4
     },
-
+    productDiscriptionText: {
+        color: 'black',
+        fontSize: 14,
+        textAlign: 'justify',
+        padding: 12
+    },
     itemHeader: {
         flex: 1,
         flexDirection: 'row',
         padding: 10,
-        paddingTop: 24
+        paddingTop: 24,
     },
     itemSubHeader: {
         fontSize: 14,
@@ -157,8 +189,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#F0F0F0',
         borderRadius: 45,
         padding: 12,
-        marginRight: 10
-
+        marginRight: 10,
+        paddingLeft: 15,
+        paddingRight: 15
     },
     commonHeader: {
         backgroundColor: '#F0F0F0',
@@ -178,7 +211,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginTop: 12,
         paddingBottom: 16,
-
     },
     specificationDetails: {
         flex: 1,
@@ -186,13 +218,30 @@ const styles = StyleSheet.create({
         padding: 12,
         paddingRight: 20
     },
+    addCart: {
+        borderColor: '#E85151',
+        borderWidth: 2,
+        padding: 16,
+        borderRadius: 4,
+        justifyContent: 'center',
+        flexDirection: 'row'
+    },
+    addCartIcon: {
+        color: '#E85151',
+        fontSize: 28,
+        paddingRight: 2
+    },
+    addCartText: {
+        color: "#E85151",
+        fontSize: 20,
+        fontWeight: '500',
+    },
     textStyle1: {
         fontSize: 14,
         fontWeight: "400",
         color: 'black',
         padding: 12,
         flex: 4,
-
     },
     textStyle2: {
         fontSize: 14,
@@ -200,9 +249,7 @@ const styles = StyleSheet.create({
         color: 'black',
         padding: 12,
         flex: 8,
-
     },
-
     reviewTextStyle1: {
 
         color: 'black',
@@ -214,7 +261,6 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     contentContainer: {
-
         backgroundColor: 'white'
     },
     footer: {
@@ -224,8 +270,7 @@ const styles = StyleSheet.create({
         borderColor: '#F0F0F0',
         borderTopWidth: 1,
         padding: 8,
-        paddingBottom: 20,
-        paddingTop: 20,
+        paddingVertical: 20,
         justifyContent: 'center',
     },
     itemDetails: {
@@ -235,6 +280,4 @@ const styles = StyleSheet.create({
         borderColor: '#F0F0F0',
         backgroundColor: 'white',
     },
-
-
 });

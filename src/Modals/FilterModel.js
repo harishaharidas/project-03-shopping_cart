@@ -16,24 +16,19 @@ export default class FilterModal extends Component {
         visible={this.props.display}
         animationType="fade"
         onRequestClose={() => this.setModalVisible(false)}
-        transparent={true}
-      >
-        <TouchableOpacity style={{ flex: 1 }} onPress={()=>this.setModalVisible(false)} />
-        <View style={{
-          bottom: 0, height: 150, width: '100%',
-          alignItems: 'center', backgroundColor: 'white',
-        }}
-        >
-        <View  style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ paddingVertical: 14, fontSize: 16 }}>
-          SORT BY GENDER
+        transparent={true} >
+        <TouchableOpacity style={{ flex: 1 }} onPress={() => this.setModalVisible(false)} />
+        <View style={styles.container}>
+          <View style={styles.content}>
+            <Text style={styles.text}>
+              SORT BY GENDER
           </Text>
-        </View>
-          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={this.props.male}>
-            <Text style={{ paddingVertical: 14, fontSize: 16 }}>Male</Text>
+          </View>
+          <TouchableOpacity style={styles.content} onPress={this.props.male}>
+            <Text style={styles.text}>Male</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={this.props.female}>
-            <Text style={{ paddingVertical: 14, fontSize: 16 }}>Female</Text>
+          <TouchableOpacity style={styles.content} onPress={this.props.female}>
+            <Text style={styles.text}>Female</Text>
           </TouchableOpacity>
         </View>
       </Modal >
@@ -42,6 +37,17 @@ export default class FilterModal extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    bottom: 48,
+    height: 150,
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  content: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   image: {
     marginTop: 20,
     marginLeft: 90,
@@ -49,8 +55,7 @@ const styles = StyleSheet.create({
     width: 200,
   },
   text: {
-    fontSize: 20,
-    marginLeft: 150,
-    paddingTop: 300
+    paddingVertical: 14,
+    fontSize: 16
   }
 })
