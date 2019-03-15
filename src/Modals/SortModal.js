@@ -19,7 +19,7 @@ export default class SortModal extends Component {
         transparent={true}>
         <TouchableOpacity style={{ flex: 1 }}  onPress={()=>this.setModalVisible(false)}/>
         <View style={{
-          bottom: 0, height: 150, width: '100%',
+          bottom: 48, height: 150, width: '100%',
           alignItems: 'center', backgroundColor: 'white',
         }}>
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>

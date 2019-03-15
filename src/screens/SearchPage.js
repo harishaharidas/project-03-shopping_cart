@@ -7,9 +7,16 @@ import FilterModal from '../Modals/FilterModel';
 
 const picker = require('../jsonFiles/product.json')
 export default class SearchPage extends Component {
-  state = {
-    display: false,
-    disp: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTerm: '',
+      display: false,
+      disp: false
+    }
+  }
+  searchUpdated(term) {
+    this.setState({ searchTerm: term })
   }
   triggerModalForSort() {
     this.setState(prevState => {
@@ -40,7 +47,7 @@ export default class SearchPage extends Component {
   }
 
   render() {
-    // alert(picker.itemList[0].title)
+    // alert(picker.itemList[i].title)
     return (
       <View style={styles.container} >
         <StatusBar backgroundColor='#F53D3F' />
@@ -49,28 +56,31 @@ export default class SearchPage extends Component {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <TouchableOpacity><Icon name='arrow-left' style={styles.goBack} /></TouchableOpacity>
               <View style={styles.search}>
-                <TextInput placeholder='Search a product' style={styles.headerInputsection} />
+                <TextInput
+                  onChangeText={(term) => { this.searchUpdated(term) }}
+                  placeholder='Search a product'
+                  style={styles.headerInputsection} />
                 <Icon name='magnify' style={styles.searchIcon} />
               </View>
             </View>
           </View>
           <View style={styles.contentAlter}>
-            <TouchableOpacity style={styles.sort} onPress = { () => this.triggerModalForSort() }>
+            <TouchableOpacity style={styles.sort} onPress={() => this.triggerModalForSort()}>
               <Icon name='sort' style={styles.sortIcon} />
               <Text style={{ color: 'red' }}>Sort</Text>
             </TouchableOpacity>
-            <SortModal 
-            display = { this.state.display }
-            onPressingValue={(value)=>this.setState({display:value})}
-          />
-            <TouchableOpacity style={styles.filter} onPress = { () => this.triggerModalForFilter() } >
+            <SortModal
+              display={this.state.display}
+              onPressingValue={(value) => this.setState({ display: value })}
+            />
+            <TouchableOpacity style={styles.filter} onPress={() => this.triggerModalForFilter()} >
               <Icon name='filter-outline' style={styles.filterIcon} />
               <Text style={{ color: 'red' }}>Filter</Text>
             </TouchableOpacity>
-            <FilterModal 
-            display = { this.state.disp }
-            onPressingValue={(value)=>this.setState({disp:value})}
-          />
+            <FilterModal
+              display={this.state.disp}
+              onPressingValue={(value) => this.setState({ disp: value })}
+            />
           </View>
         </View>
         <ScrollView style={styles.contentsection}>

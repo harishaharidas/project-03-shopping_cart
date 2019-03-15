@@ -8,16 +8,11 @@
  */
 
 import React, { Component } from 'react';
-import SearchPage from './src/screens/SearchPage';
-import Home from './src/screens/Home';
 import AppContainer from './src/routes/DrawerNavigation'
 
 export default class App extends Component {
   render() {
     return (
-      // <Home/>
-      // <SearchPage />
-      // <Cart />
       <AppContainer/>
     );
   }

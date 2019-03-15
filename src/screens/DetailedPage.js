@@ -5,39 +5,55 @@ import itemImage from '../images/cart1.jpg';
 import StarRating from '../Components/StarRating'
 
 const picker = require('../jsonFiles/product.json')
-export default class Cart extends Component {
+export default class DetailedPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            content: ' ADD TO CART FOR $ ',
+        }
+    }
+    onPressAddToCart = () => {
+        this.setState({
+            content: ' ADDED TO CART'
+        });
+    }
     render() {
+        const { navigation } = this.props;
+        const productTitle = navigation.getParam('productTitle', 'NO-ID');
+        const productImage = navigation.getParam('productThumbnail', 'NO-ID');
+        const productDiscription = navigation.getParam('productDiscription', 'NO-ID');
+        const price = navigation.getParam('price', 'NO-ID');
         return (
 
             <View style={styles.container}>
-               <StatusBar backgroundColor='#F53D3F' />
+                <StatusBar backgroundColor='#F53D3F' />
                 <View style={styles.header}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.goBack(null)}>
                         <Icon name='arrow-left' style={{ fontSize: 28, paddingRight: 2 }} />
                     </TouchableOpacity>
                     <Text style={{ fontSize: 24, fontWeight: "bold", paddingLeft: 40 }}>
-                        Woo Single Awesome
-                </Text>
+                        {productTitle}
+                    </Text>
                 </View>
                 <View style={styles.main}>
                     <ScrollView contentContainerStyle={styles.contentContainer}>
                         <View style={styles.itemDetails}>
                             <View style={styles.imageStyle}>
-                                <Image source={itemImage} style={{ width: 260, height: 200, resizeMode: 'stretch' }} />
+                                <Image source={{ uri: (productImage) }} resizeMode='stretch' style={{ width: 360, height: 300, resizeMode: 'stretch' }} />
                             </View>
 
                             <View style={styles.itemHeader}>
                                 <Text style={{ fontSize: 20, fontWeight: "500", color: 'black', paddingRight: 20 }}> Woo Single Awesome</Text>
-                                <TouchableOpacity><Text style={styles.itemSubHeader}>Musics</Text></TouchableOpacity>
-                                <TouchableOpacity><Text style={styles.itemSubHeader}>Singles</Text></TouchableOpacity>
+                                <TouchableOpacity><Text style={styles.itemSubHeader}>{picker.itemList[0].category}</Text></TouchableOpacity>
+                                <TouchableOpacity style={{ flexDirection: 'row' }}>
+                                    <Text style={styles.itemSubHeader}>
+                                        {picker.itemList[0].rating}{" / 5"}
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
 
-                            <Text style={{ color: 'black', fontSize: 12, textAlign: 'justify', padding: 12 }}>
-                                It is a long established fact that a reader will be distracted by the readable
-                                content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                 that it has a more-or-less normal distribution of letters, as opposed to using
-                                 'Content here, content here', making it look like readable English. Many desktop
-                                 publishing packages and web page editors now use Lorem Ipsum as their default model text.
+                            <Text style={{ color: 'black', fontSize: 14, textAlign: 'justify', padding: 12 }}>
+                                {productDiscription}
                             </Text>
                         </View>
                         <View style={styles.specification}>
@@ -85,13 +101,15 @@ export default class Cart extends Component {
                         </View>
                     </ScrollView>
                 </View>
-                <TouchableOpacity style={styles.iconStyle}>
+                <TouchableOpacity style={styles.iconStyle}  onPress={() => this.props.navigation.navigate('Cart')}>
                     <Icon name='cart' style={{ color: 'white', fontSize: 28 }} />
                 </TouchableOpacity>
                 <View style={styles.footer}>
-                    <TouchableOpacity style={{ borderColor: '#E85151', borderWidth: 2, padding: 16, borderRadius: 4, justifyContent: 'center', flexDirection: 'row' }}>
+                    <TouchableOpacity
+                        onPress={() => this.onPressAddToCart()}
+                        style={{ borderColor: '#E85151', borderWidth: 2, padding: 16, borderRadius: 4, justifyContent: 'center', flexDirection: 'row' }}>
                         <Icon name='basket' style={{ color: '#E85151', fontSize: 28, paddingRight: 2 }} />
-                        <Text style={{ color: "#E85151", fontSize: 20, fontWeight: '500', }}>{' '}ADD TO CART FOR $ 2</Text>
+                        <Text style={{ color: "#E85151", fontSize: 20, fontWeight: '500', }}>{this.state.content}{price}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -110,7 +128,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         backgroundColor: "#F5F5F5",
         padding: 10,
-        paddingTop: 24,
+        paddingVertical: 20,
         borderColor: '#F0F0F0',
         borderBottomWidth: 1,
 
@@ -136,8 +154,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#F0F0F0',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 72,
-        paddingBottom: 72,
+        // paddingTop: 72,
+        // paddingBottom: 72,
         borderTopEndRadius: 4,
         borderTopStartRadius: 4
     },
@@ -157,7 +175,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#F0F0F0',
         borderRadius: 45,
         padding: 12,
-        marginRight: 10
+        marginRight: 10,
+        paddingLeft: 15,
+        paddingRight: 15
 
     },
     commonHeader: {
@@ -224,8 +244,7 @@ const styles = StyleSheet.create({
         borderColor: '#F0F0F0',
         borderTopWidth: 1,
         padding: 8,
-        paddingBottom: 20,
-        paddingTop: 20,
+        paddingVertical: 20,
         justifyContent: 'center',
     },
     itemDetails: {
