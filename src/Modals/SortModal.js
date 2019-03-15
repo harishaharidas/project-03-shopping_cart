@@ -1,15 +1,17 @@
 
 import React, { Component } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+const Product = require('../jsonFiles/product.json')
 
 export default class SortModal extends Component {
   state = {
     modalVisible: this.props.display,
+  
   };
   setModalVisible = (visible) => {
     this.props.onPressingValue(visible)
   }
-
+ 
   render() {
     return (
       <Modal
@@ -17,7 +19,7 @@ export default class SortModal extends Component {
         animationType="fade"
         onRequestClose={() => this.setModalVisible(false)}
         transparent={true}>
-        <TouchableOpacity style={{ flex: 1 }}  onPress={()=>this.setModalVisible(false)}/>
+        <TouchableOpacity style={{ flex: 1 }} onPress={() => this.setModalVisible(false)} />
         <View style={{
           bottom: 0, height: 150, width: '100%',
           alignItems: 'center', backgroundColor: 'white',
@@ -25,14 +27,14 @@ export default class SortModal extends Component {
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
           <Text style={{ paddingVertical: 14, fontSize: 16 }}>SORT BY PRICE</Text>
         </View>
-          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ paddingVertical: 14, fontSize: 16 }}>Low to High</Text>
+          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center'}}  onPress={this.props.lowToHigh}>
+            <Text style={{ paddingVertical: 14, fontSize: 16 }} >Low to High</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}  onPress={this.props.highToLow}>
             <Text style={{ paddingVertical: 14, fontSize: 16 }}>High to Low</Text>
           </TouchableOpacity>
         </View>
-      </Modal >
+      </Modal>
     );
   }
 }
