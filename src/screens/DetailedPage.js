@@ -12,17 +12,17 @@ export default class DetailedPage extends Component {
     }
     onPressAddToCart = () => {
         this.setState({
-            content: ' ADDED TO CART'
+            content: ' ADDED TO CART FOR $ '
         });
     }
     render() {
         const { navigation } = this.props;
-        const productTitle = navigation.getParam('productTitle', 'NO-ID');
-        const productImage = navigation.getParam('productThumbnail', 'NO-ID');
-        const productDiscription = navigation.getParam('productDiscription', 'NO-ID');
-        const price = navigation.getParam('price', 'NO-ID');
-        const star = navigation.getParam('star', 'NO-ID');
-        const category = navigation.getParam('category', 'NO-ID');
+        const productTitle = navigation.getParam('productTitle', 'Invalid');
+        const productImage = navigation.getParam('productThumbnail', 'Invalid');
+        const productDiscription = navigation.getParam('productDiscription', 'Invalid');
+        const price = navigation.getParam('price', 'Invalid');
+        const star = navigation.getParam('star', 'Invalid');
+        const category = navigation.getParam('category', 'Invalid');
         return (
             <View style={styles.container}>
                 <StatusBar backgroundColor='#F53D3F' />

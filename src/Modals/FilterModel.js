@@ -3,13 +3,33 @@ import React, { Component } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default class FilterModal extends Component {
-  state = {
-    modalVisible: this.props.display,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      pressStatus1: false,
+      pressStatus2: false,
+      modalVisible: this.props.display
+    };
+  }
   setModalVisible = (visible) => {
     this.props.onPressingValue(visible)
   }
 
+  onPressFilterSelectionMale = () => {
+    this.setState({ pressStatus1: true }),
+    this.setState({ pressStatus2: false }),
+    this.props.male();
+  }
+  onPressFilterSelectionFemale = () => {
+    this.setState({ pressStatus1: false }),
+    this.setState({ pressStatus2: true }),
+    this.props.female();
+  }
+  onPressFilterSelectionNoFilter = () => {
+    this.setState({ pressStatus1: false }),
+    this.setState({ pressStatus2: false }),
+    this.props.female();
+  }
   render() {
     return (
       <Modal
@@ -20,18 +40,22 @@ export default class FilterModal extends Component {
         <TouchableOpacity style={{ flex: 1 }} onPress={() => this.setModalVisible(false)} />
         <View style={styles.container}>
           <View style={styles.content}>
-            <Text style={styles.text}>
+            <Text style={[styles.text, { color: 'tomato' }]}>
               SORT BY GENDER
           </Text>
           </View>
-          <TouchableOpacity style={styles.content} onPress={this.props.male}>
-            <Text style={styles.text}>Male</Text>
+          <TouchableOpacity style={styles.content} onPress={()=>this.onPressFilterSelectionMale()}>
+            <Text
+              style={this.state.pressStatus1 && !this.state.pressStatus2 ? styles.textHighlight : styles.text}
+            >
+              Male
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.content} onPress={this.props.female}>
-            <Text style={styles.text}>Female</Text>
+          <TouchableOpacity style={styles.content} onPress={()=>this.onPressFilterSelectionFemale()}>
+            <Text style={!this.state.pressStatus1 && this.state.pressStatus2 ? styles.textHighlight : styles.text}>Female</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.content} onPress={this.props.noFilter}>
-            <Text style={styles.text}>Remove All</Text>
+          <TouchableOpacity style={styles.content} onPress={()=>this.onPressFilterSelectionNoFilter()}>
+            <Text style={this.state.pressStatus1 && this.state.pressStatus2 ? styles.textHighlight : styles.text}>Remove All</Text>
           </TouchableOpacity>
         </View>
       </Modal >
@@ -49,7 +73,7 @@ const styles = StyleSheet.create({
   },
   content: {
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   image: {
     marginTop: 20,
@@ -60,5 +84,10 @@ const styles = StyleSheet.create({
   text: {
     paddingVertical: 14,
     fontSize: 16
+  },
+  textHighlight: {
+    paddingVertical: 14,
+    fontSize: 16,
+    color: 'red'
   }
 })
