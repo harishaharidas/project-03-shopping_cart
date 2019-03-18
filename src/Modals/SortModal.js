@@ -6,8 +6,7 @@ export default class SortModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pressStatus: false,
-      pressStatus2: false,
+      ononPressStatus: 0,
       modalVisible: this.props.display,
     };
   }
@@ -16,13 +15,11 @@ export default class SortModal extends Component {
   }
 
   onPressFilterSelectionLowToHigh = () => {
-    this.setState({ pressStatus1: true }),
-    this.setState({ pressStatus2: false }),
+    this.setState({ onPressStatus: 1 }),
     this.props.lowToHigh();
   }
   onPressFilterSelectionHighToLow = () => {
-    this.setState({ pressStatus1: false }),
-    this.setState({ pressStatus2: true }),
+    this.setState({ onPressStatus: 2 }),
     this.props.highToLow();
   }
   render() {
@@ -38,10 +35,10 @@ export default class SortModal extends Component {
           <Text style={[styles.text,{color:'tomato'}]}>SORT BY PRICE</Text>
           </View>
           <TouchableOpacity style={styles.content}  onPress={()=>this.onPressFilterSelectionLowToHigh()}>
-            <Text style={this.state.pressStatus1 && !this.state.pressStatus2 ? styles.textHighlight : styles.text} >Low to High</Text>
+            <Text style={this.state.onPressStatus==1 ? styles.textHighlight : styles.text} >Low to High</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.content}  onPress={()=>this.onPressFilterSelectionHighToLow()}>
-            <Text style={!this.state.pressStatus1 && this.state.pressStatus2 ? styles.textHighlight : styles.text}>High to Low</Text>
+            <Text style={!this.state.onPressStatus==2 ? styles.textHighlight : styles.text}>High to Low</Text>
           </TouchableOpacity>
         </View>
       </Modal>

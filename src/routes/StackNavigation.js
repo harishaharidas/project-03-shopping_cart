@@ -11,12 +11,12 @@ export default StackNavigator = createStackNavigator(
     Home: Home,
     SearchPage: SearchPage,
     AboutUs: AboutUs,
-    DetailedPage: DetailedPage,
+    // DetailedPage: DetailedPage,
     Cart: Cart,
     TabNavigator: TabNavigator
   },
   {
-    initialRouteName: "TabNavigator",
+    // initialRouteName: "TabNavigator",
     headerMode: 'none',
   },
 );

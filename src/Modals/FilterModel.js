@@ -6,8 +6,7 @@ export default class FilterModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pressStatus1: false,
-      pressStatus2: false,
+      onPressStatus:0,
       modalVisible: this.props.display
     };
   }
@@ -16,19 +15,16 @@ export default class FilterModal extends Component {
   }
 
   onPressFilterSelectionMale = () => {
-    this.setState({ pressStatus1: true }),
-    this.setState({ pressStatus2: false }),
+    this.setState({ onPressStatus: 1 }),
     this.props.male();
   }
   onPressFilterSelectionFemale = () => {
-    this.setState({ pressStatus1: false }),
-    this.setState({ pressStatus2: true }),
+    this.setState({ onPressStatus: 2 }),
     this.props.female();
   }
   onPressFilterSelectionNoFilter = () => {
-    this.setState({ pressStatus1: false }),
-    this.setState({ pressStatus2: false }),
-    this.props.female();
+    this.setState({ onPressStatus: 3 }),
+    this.props.noFilter();
   }
   render() {
     return (
@@ -46,16 +42,16 @@ export default class FilterModal extends Component {
           </View>
           <TouchableOpacity style={styles.content} onPress={()=>this.onPressFilterSelectionMale()}>
             <Text
-              style={this.state.pressStatus1 && !this.state.pressStatus2 ? styles.textHighlight : styles.text}
+              style={this.state.onPressStatus==1 ? styles.textHighlight : styles.text}
             >
               Male
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.content} onPress={()=>this.onPressFilterSelectionFemale()}>
-            <Text style={!this.state.pressStatus1 && this.state.pressStatus2 ? styles.textHighlight : styles.text}>Female</Text>
+            <Text style={this.state.onPressStatus==2 ? styles.textHighlight : styles.text}>Female</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.content} onPress={()=>this.onPressFilterSelectionNoFilter()}>
-            <Text style={this.state.pressStatus1 && this.state.pressStatus2 ? styles.textHighlight : styles.text}>Remove All</Text>
+            <Text style={this.state.onPressStatus==3 ? styles.text : styles.text}>Remove All</Text>
           </TouchableOpacity>
         </View>
       </Modal >
