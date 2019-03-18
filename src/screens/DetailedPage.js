@@ -41,13 +41,13 @@ export default class DetailedPage extends Component {
                                 <Image source={{ uri: (productImage) }} resizeMode='stretch' style={styles.productImage} />
                             </View>
                             <View style={styles.itemHeader}>
-                                <Text style={styles.discriptionHeading}> Woo Single Awesome</Text>
-                                <TouchableOpacity><Text style={styles.itemSubHeader}>{category}</Text></TouchableOpacity>
-                                <TouchableOpacity style={{ flexDirection: 'row' }}>
+                                <Text style={styles.discriptionHeading}> {productTitle}</Text>
+                                <View><Text style={styles.itemSubHeader}>{category}</Text></View>
+                                <View style={{ flexDirection: 'row' }}>
                                     <Text style={styles.itemSubHeader}>
                                         {star}{" / 5"}
                                     </Text>
-                                </TouchableOpacity>
+                                </View>
                             </View>
                             <Text style={styles.productDiscriptionText}>
                                 {productDiscription}
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         right: 10,
-        top: 60,
+        top: 75,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -152,8 +152,10 @@ const styles = StyleSheet.create({
     discriptionHeading: {
         fontSize: 20,
         fontWeight: "500",
+        width:220,
         color: 'black',
-        paddingRight: 20
+        paddingRight: 20,
+        paddingTop:10
     },
     main: {
         flex: 20,

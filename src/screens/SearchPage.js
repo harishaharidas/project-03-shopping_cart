@@ -129,7 +129,7 @@ export default class SearchPage extends Component {
         <View style={{ height: 120 }}>
           <View style={styles.headerInputsection}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <TouchableOpacity><Icon name='arrow-left' style={styles.goBack}  onPress={() => this.props.navigation.goBack(null)}/></TouchableOpacity>
+              <TouchableOpacity><Icon name='arrow-left' style={styles.goBack}  onPress={() => this.props.navigation.goBack()}/></TouchableOpacity>
               <View style={styles.search}>
                 <TextInput placeholder='Search a product' style={styles.headerInputsection} onChangeText={this.displayTextInput}/>
                 <Icon name='magnify' style={styles.searchIcon}  onPress={() => this.searchFilter()}/>
