@@ -50,7 +50,9 @@ export default class SearchPage extends Component {
     })
     this.setState(prevState => {
       return {
+     
         abcd: priceValue
+
       }
     });
   }
@@ -62,6 +64,7 @@ export default class SearchPage extends Component {
     })
     this.setState(prevState => {
       return {
+      
         abcd: priceValue
       }
     });

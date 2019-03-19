@@ -30,6 +30,9 @@ export default class FilterModal extends Component {
           <TouchableOpacity style={styles.content} onPress={this.props.female}>
             <Text style={styles.text}>Female</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.content} onPress={this.props.noFilter}>
+            <Text style={styles.text}>Remove All</Text>
+          </TouchableOpacity>
         </View>
       </Modal >
     );
@@ -39,7 +42,7 @@ export default class FilterModal extends Component {
 const styles = StyleSheet.create({
   container: {
     bottom: 48,
-    height: 150,
+    height: 200,
     width: '100%',
     alignItems: 'center',
     backgroundColor: 'white',

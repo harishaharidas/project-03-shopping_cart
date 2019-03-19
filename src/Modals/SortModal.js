@@ -5,6 +5,7 @@ import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 export default class SortModal extends Component {
   state = {
     modalVisible: this.props.display,
+   
   };
   setModalVisible = (visible) => {
     this.props.onPressingValue(visible)
@@ -23,10 +24,10 @@ export default class SortModal extends Component {
             <Text style={styles.text}>SORT BY PRICE</Text>
           </View>
           <TouchableOpacity style={styles.content} onPress={this.props.lowToHigh}>
-            <Text style={styles.text} >Low to High</Text>
+            <Text style={this.props.colorCheck?styles.textColor:styles.text} >Low to High</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.content} onPress={this.props.highToLow}>
-            <Text style={styles.text}>High to Low</Text>
+            <Text style={this.props.colorCheck?styles.textColor:styles.text}>High to Low</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -55,5 +56,8 @@ const styles = StyleSheet.create({
   text: {
     paddingVertical: 14,
     fontSize: 16
+  },
+  textColor: {
+    color:'red'
   }
 })
