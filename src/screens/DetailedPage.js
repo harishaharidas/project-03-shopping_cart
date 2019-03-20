@@ -12,17 +12,17 @@ export default class DetailedPage extends Component {
     }
     onPressAddToCart = () => {
         this.setState({
-            content: ' ADDED TO CART'
+            content: ' ADDED TO CART FOR $ '
         });
     }
     render() {
         const { navigation } = this.props;
-        const productTitle = navigation.getParam('productTitle', 'NO-ID');
-        const productImage = navigation.getParam('productThumbnail', 'NO-ID');
-        const productDiscription = navigation.getParam('productDiscription', 'NO-ID');
-        const price = navigation.getParam('price', 'NO-ID');
-        const star = navigation.getParam('star', 'NO-ID');
-        const category = navigation.getParam('category', 'NO-ID');
+        const productTitle = navigation.getParam('productTitle', 'Invalid');
+        const productImage = navigation.getParam('productThumbnail', 'Invalid');
+        const productDiscription = navigation.getParam('productDiscription', 'Invalid');
+        const price = navigation.getParam('price', 'Invalid');
+        const star = navigation.getParam('star', 'Invalid');
+        const category = navigation.getParam('category', 'Invalid');
         return (
             <View style={styles.container}>
                 <StatusBar backgroundColor='#F53D3F' />
@@ -41,13 +41,13 @@ export default class DetailedPage extends Component {
                                 <Image source={{ uri: (productImage) }} resizeMode='stretch' style={styles.productImage} />
                             </View>
                             <View style={styles.itemHeader}>
-                                <Text style={styles.discriptionHeading}> Woo Single Awesome</Text>
-                                <TouchableOpacity><Text style={styles.itemSubHeader}>{category}</Text></TouchableOpacity>
-                                <TouchableOpacity style={{ flexDirection: 'row' }}>
+                                <Text style={styles.discriptionHeading}> {productTitle}</Text>
+                                <View><Text style={styles.itemSubHeader}>{category}</Text></View>
+                                <View style={{ flexDirection: 'row' }}>
                                     <Text style={styles.itemSubHeader}>
                                         {star}{" / 5"}
                                     </Text>
-                                </TouchableOpacity>
+                                </View>
                             </View>
                             <Text style={styles.productDiscriptionText}>
                                 {productDiscription}
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         right: 10,
-        top: 60,
+        top: 75,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -152,8 +152,10 @@ const styles = StyleSheet.create({
     discriptionHeading: {
         fontSize: 20,
         fontWeight: "500",
+        width:220,
         color: 'black',
-        paddingRight: 20
+        paddingRight: 20,
+        paddingTop:10
     },
     main: {
         flex: 20,

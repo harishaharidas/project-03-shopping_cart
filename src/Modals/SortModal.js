@@ -3,14 +3,25 @@ import React, { Component } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default class SortModal extends Component {
-  state = {
-    modalVisible: this.props.display,
-   
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      ononPressStatus: 0,
+      modalVisible: this.props.display,
+    };
+  }
   setModalVisible = (visible) => {
     this.props.onPressingValue(visible)
   }
 
+  onPressFilterSelectionLowToHigh = () => {
+    this.setState({ onPressStatus: 1 }),
+    this.props.lowToHigh();
+  }
+  onPressFilterSelectionHighToLow = () => {
+    this.setState({ onPressStatus: 2 }),
+    this.props.highToLow();
+  }
   render() {
     return (
       <Modal
@@ -21,13 +32,13 @@ export default class SortModal extends Component {
         <TouchableOpacity style={{ flex: 1 }} onPress={() => this.setModalVisible(false)} />
         <View style={styles.container}>
           <View style={styles.content}>
-            <Text style={styles.text}>SORT BY PRICE</Text>
+          <Text style={[styles.text,{color:'tomato'}]}>SORT BY PRICE</Text>
           </View>
-          <TouchableOpacity style={styles.content} onPress={this.props.lowToHigh}>
-            <Text style={this.props.colorCheck?styles.textColor:styles.text} >Low to High</Text>
+          <TouchableOpacity style={styles.content}  onPress={()=>this.onPressFilterSelectionLowToHigh()}>
+            <Text style={this.state.onPressStatus==1 ? styles.textHighlight : styles.text} >Low to High</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.content} onPress={this.props.highToLow}>
-            <Text style={this.props.colorCheck?styles.textColor:styles.text}>High to Low</Text>
+          <TouchableOpacity style={styles.content}  onPress={()=>this.onPressFilterSelectionHighToLow()}>
+            <Text style={!this.state.onPressStatus==2 ? styles.textHighlight : styles.text}>High to Low</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -57,7 +68,9 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     fontSize: 16
   },
-  textColor: {
-    color:'red'
+  textHighlight: {
+    paddingVertical: 14,
+    fontSize: 16,
+    color: 'red'
   }
 })

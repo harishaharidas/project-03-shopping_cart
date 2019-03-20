@@ -11,10 +11,18 @@ export default class SearchPage extends Component {
     display: false,
     disp: false,
     abcd: abc.itemList,
+<<<<<<< HEAD
     
     // priceValue: []
+=======
+    valueInput: ''
+>>>>>>> 07a2fd1594016831d103e8c2f069208e2937d059
   }
-
+  displayTextInput = val => {
+    this.setState({
+      valueInput: val
+    });
+}
   triggerModal() {
     this.setState(prevState => {
       return {
@@ -29,8 +37,12 @@ export default class SearchPage extends Component {
       }
     });
   }
+<<<<<<< HEAD
 
   aFunction = () => {
+=======
+  displayContent = () => {
+>>>>>>> 07a2fd1594016831d103e8c2f069208e2937d059
     return this.state.abcd.map((data) => {
       return (
         <ProductComponent
@@ -83,10 +95,11 @@ export default class SearchPage extends Component {
       }
     });
   }
-  filterFemale =()=> {
-    checkFun=(i) => {
-      var value="Female";
-       return i.category==value;
+  filterFemale = () => {
+    checkFun = (i) => {
+      const value = "Female";
+      return i.category == value;
+      
     }
     var filtered = abc.itemList.filter(checkFun);
     this.setState(prevState => {
@@ -96,8 +109,21 @@ export default class SearchPage extends Component {
       }
     });
   }
-  
-
+  searchFilter=()=>{
+    checkFun = (i) => {
+      const value = this.state.valueInput;
+      console.log(i.title, 'i.title');
+      console.log(value, 'value');
+      return i.title == value;
+    }
+    const filtered = abc.itemList.filter(checkFun);
+    this.setState(() => {
+      return {
+        abcd: filtered,
+        disp: false
+      }
+    });
+}
   render() {
     return (
       <View style={styles.container} >
@@ -105,10 +131,10 @@ export default class SearchPage extends Component {
         <View style={{ height: 120 }}>
           <View style={styles.headerInputsection}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <TouchableOpacity><Icon name='arrow-left' style={styles.goBack} /></TouchableOpacity>
+              <TouchableOpacity><Icon name='arrow-left' style={styles.goBack}  onPress={() => this.props.navigation.goBack()}/></TouchableOpacity>
               <View style={styles.search}>
-                <TextInput placeholder='Search a product' style={styles.headerInputsection} />
-                <Icon name='magnify' style={styles.searchIcon} />
+                <TextInput placeholder='Search a product' style={styles.headerInputsection} onChangeText={this.displayTextInput}/>
+                <Icon name='magnify' style={styles.searchIcon}  onPress={() => this.searchFilter()}/>
               </View>
             </View>
           </View>
@@ -122,7 +148,6 @@ export default class SearchPage extends Component {
               onPressingValue={(value) => this.setState({ display: value })}
               lowToHigh={this.lowToHighSort}
               highToLow={this.highToLowSort}
-
             />
             <TouchableOpacity style={styles.filter} onPress={() => this.triggerModal2()} >
               <Icon name='filter-outline' style={styles.filterIcon} />
@@ -137,7 +162,7 @@ export default class SearchPage extends Component {
           </View>
         </View>
         <ScrollView style={styles.contentsection}>
-          {this.aFunction()}
+          {this.displayContent()}
         </ScrollView>
       </View >
     );
