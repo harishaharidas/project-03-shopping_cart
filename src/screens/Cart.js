@@ -3,11 +3,15 @@ import { StyleSheet, View, ScrollView, Text, StatusBar, TextInput, TouchableOpac
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class SearchPage extends Component {
-  state = {
-    totalClick: false,
-    checkClick: false
-  };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      totalClick: false,
+      checkClick: false,
+      count: 0
+    };
+  }
   setTotalClick = () => {
     this.setState({
       totalClick: true,
@@ -20,6 +24,20 @@ export default class SearchPage extends Component {
       checkClick: true,
       totalClick: false,
     })
+  }
+
+  incrementCount = () =>{
+    this.setState = ({
+      count: count + 1
+    });
+  }
+
+  decrementCount = () => {
+    if (count > 0) {
+      this.setState = ({
+        count: count - 1
+      });
+    }
   }
 
   render() {
@@ -38,7 +56,7 @@ export default class SearchPage extends Component {
         <View style={styles.main}>
           <View style={styles.cartItem}>
             <View style={styles.ItemDetails}>
-              <View style={{ flex: 16 ,  paddingTop:20,paddingBottom:20,}}>
+              <View style={{ flex: 16, paddingTop: 20, paddingBottom: 20, }}>
                 <Text style={{ color: 'black', fontSize: 16 }}>Item Name
               </Text>
                 <Text style={{ color: 'black', fontSize: 14 }}>Description
@@ -46,14 +64,19 @@ export default class SearchPage extends Component {
                 <Text style={{ color: 'black', fontSize: 14 }}> $
               </Text>
               </View>
-              <View style={{ flex:4 , padding: 8,height:'100%', backgroundColor: 'red' }}>
+              <View style={{ flex: 4, padding: 8, height: '100%', backgroundColor: 'red' }}>
               </View>
             </View>
             <View style={styles.ItemOptions}>
               <View style={{ flexDirection: 'row', flex: 12, alignItems: 'stretch', justifyContent: 'flex-start', }}>
-                <Icon name='minus-circle' style={{ fontSize: 24, color: '#F53D3F', paddingRight: 40 }} />
-                <Text style={{ color: 'black', fontSize: 16, paddingRight: 40 }}>No</Text>
-                <Icon name='plus-circle' style={{ fontSize: 24, color: '#F53D3F', paddingRight: 40 }} />
+                <TouchableOpacity onPress={() => this.incrementCount}>
+                  <Icon name='minus-circle' style={{ fontSize: 24, color: '#F53D3F', paddingRight: 40 }} />
+                </TouchableOpacity>
+                <Text style={{ color: 'black', fontSize: 16, paddingRight: 40 }}>{this.state.count}</Text>
+                <TouchableOpacity onPress={() => this.decrementCount}>
+                  <Icon name='plus-circle' style={{ fontSize: 24, color: '#F53D3F', paddingRight: 40 }} />
+                </TouchableOpacity>
+
               </View>
               <TouchableOpacity style={{ flex: 4, }}>
                 <Text style={styles.removeButton}>REMOVE</Text>
@@ -114,12 +137,12 @@ const styles = StyleSheet.create({
     padding: 12,
     flexDirection: 'row',
     alignItems: 'center',
-  
+
   },
   ItemOptions: {
     backgroundColor: 'white',
     padding: 8,
-    paddingLeft:20,
+    paddingLeft: 20,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -130,7 +153,7 @@ const styles = StyleSheet.create({
     borderColor: '#F53D3F',
     borderWidth: 1,
     padding: 8,
-    borderRadius:4
+    borderRadius: 4
   },
   footer: {
     flex: 3,
@@ -144,7 +167,7 @@ const styles = StyleSheet.create({
     color: '#F53D3F',
     fontSize: 16,
     fontWeight: '400',
-   
+
   },
   onPressText: {
     color: '#F53D3F',
@@ -155,7 +178,7 @@ const styles = StyleSheet.create({
     padding: 12,
     paddingLeft: 48,
     paddingRight: 48,
-    borderRadius:4
+    borderRadius: 4
   }
 
 });
