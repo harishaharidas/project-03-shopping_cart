@@ -11,7 +11,12 @@ export default class SearchPage extends Component {
     display: false,
     disp: false,
     abcd: abc.itemList,
+<<<<<<< HEAD
+    
+    // priceValue: []
+=======
     valueInput: ''
+>>>>>>> 07a2fd1594016831d103e8c2f069208e2937d059
   }
   displayTextInput = val => {
     this.setState({
@@ -32,7 +37,12 @@ export default class SearchPage extends Component {
       }
     });
   }
+<<<<<<< HEAD
+
+  aFunction = () => {
+=======
   displayContent = () => {
+>>>>>>> 07a2fd1594016831d103e8c2f069208e2937d059
     return this.state.abcd.map((data) => {
       return (
         <ProductComponent
@@ -40,56 +50,48 @@ export default class SearchPage extends Component {
           productTitle={data.title}
           productDiscription={data.description}
           price={data.price}
-          iconCount={data.rating}
-          rating={data.rating}
-          category={data.category} />
+          iconCount={data.rating} />
       );
     });
   }
+
   lowToHighSort = () => {
-    const priceValue = this.state.abcd.sort((a, b) => {
+
+    var priceValue = this.state.abcd.sort((a, b) => {
       return a.price - b.price;
     })
-    this.setState(() => {
+    this.setState(prevState => {
       return {
-        abcd: priceValue,
-        display: false
+     
+        abcd: priceValue
+
       }
     });
   }
+
   highToLowSort = () => {
-    const priceValue = this.state.abcd.sort((a, b) => {
+
+    var priceValue = this.state.abcd.sort((a, b) => {
       return b.price - a.price;
     })
-    this.setState(() => {
+    this.setState(prevState => {
       return {
-        abcd: priceValue,
-        display: false
+      
+        abcd: priceValue
       }
     });
   }
-  filterMale = () => {
-    checkFun = (i) => {
-      const value = "Male";
-      return i.category == value;
+
+  filterMale =()=> {
+    checkFun=(i) => {
+      var value="Male";
+       return i.category==value;
     }
-    const filtered = abc.itemList.filter(checkFun);
-    this.setState(() => {
+    var filtered = abc.itemList.filter(checkFun);
+    this.setState(prevState => {
       return {
         abcd: filtered,
-        disp: false
-      }
-    });
-  }
-  noFilter = () => {
-    checkFun = (i) => {
-      return i;
-    }
-    const filtered = abc.itemList.filter(checkFun);
-    this.setState(() => {
-      return {
-        abcd: filtered,
-        disp: false
+        disp:false
       }
     });
   }
@@ -99,11 +101,11 @@ export default class SearchPage extends Component {
       return i.category == value;
       
     }
-    const filtered = abc.itemList.filter(checkFun);
-    this.setState(() => {
+    var filtered = abc.itemList.filter(checkFun);
+    this.setState(prevState => {
       return {
         abcd: filtered,
-        disp: false
+        disp:false
       }
     });
   }
@@ -156,7 +158,6 @@ export default class SearchPage extends Component {
               onPressingValue={(value) => this.setState({ disp: value })}
               male={this.filterMale}
               female={this.filterFemale}
-              noFilter={this.noFilter}
             />
           </View>
         </View>
