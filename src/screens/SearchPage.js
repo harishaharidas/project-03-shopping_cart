@@ -8,21 +8,10 @@ const jsonPicker = require('../jsonFiles/product.json')
 
 export default class SearchPage extends Component {
   state = {
-<<<<<<< HEAD
     sortModalDisplay: false,
     filterModalDisplay: false,
     arrayList: jsonPicker.itemList,
-=======
-    display: false,
-    disp: false,
-    abcd: abc.itemList,
-<<<<<<< HEAD
-    
-    // priceValue: []
-=======
->>>>>>> 22de0447f9937ab4bf9860c97b60e9bd5d306346
     valueInput: ''
->>>>>>> 07a2fd1594016831d103e8c2f069208e2937d059
   }
   displayTextInput = val => {
     this.setState({
@@ -44,63 +33,37 @@ triggerModalToSort() {
       }
     });
   }
-<<<<<<< HEAD
-
-  aFunction = () => {
-=======
   displayContent = () => {
-<<<<<<< HEAD
     return this.state.arrayList.map((data) => {
-=======
->>>>>>> 07a2fd1594016831d103e8c2f069208e2937d059
-    return this.state.abcd.map((data) => {
->>>>>>> 22de0447f9937ab4bf9860c97b60e9bd5d306346
       return (
         <ProductComponent
           productThumbnail={data.image}
           productTitle={data.title}
           productDiscription={data.description}
           price={data.price}
-          iconCount={data.rating} />
+          iconCount={data.rating}
+          rating={data.rating}
+          category={data.category} />
       );
     });
   }
-
   lowToHighSort = () => {
-<<<<<<< HEAD
     const priceValue = this.state.arrayList.sort((a, b) => {
-=======
-
-    var priceValue = this.state.abcd.sort((a, b) => {
->>>>>>> 22de0447f9937ab4bf9860c97b60e9bd5d306346
       return a.price - b.price;
     })
-    this.setState(prevState => {
+    this.setState(() => {
       return {
-<<<<<<< HEAD
         arrayList: priceValue,
         sortModalDisplay: false
-=======
-     
-        abcd: priceValue
-
->>>>>>> 22de0447f9937ab4bf9860c97b60e9bd5d306346
       }
     });
   }
-
   highToLowSort = () => {
-<<<<<<< HEAD
     const priceValue = this.state.arrayList.sort((a, b) => {
-=======
-
-    var priceValue = this.state.abcd.sort((a, b) => {
->>>>>>> 22de0447f9937ab4bf9860c97b60e9bd5d306346
       return b.price - a.price;
     })
-    this.setState(prevState => {
+    this.setState(() => {
       return {
-<<<<<<< HEAD
         arrayList: priceValue,
         sortModalDisplay: false
       }
@@ -116,32 +79,18 @@ triggerModalToSort() {
       return {
         arrayList: filtered,
         filterModalDisplay: false
-=======
-      
-        abcd: priceValue
->>>>>>> 22de0447f9937ab4bf9860c97b60e9bd5d306346
       }
     });
   }
-
-  filterMale =()=> {
-    checkFun=(i) => {
-      var value="Male";
-       return i.category==value;
+  noFilter = () => {
+    checkFun = (i) => {
+      return i;
     }
-<<<<<<< HEAD
     const filtered = jsonPicker.itemList.filter(checkFun);
     this.setState(() => {
       return {
         arrayList: filtered,
         filterModalDisplay: false
-=======
-    var filtered = abc.itemList.filter(checkFun);
-    this.setState(prevState => {
-      return {
-        abcd: filtered,
-        disp:false
->>>>>>> 22de0447f9937ab4bf9860c97b60e9bd5d306346
       }
     });
   }
@@ -151,19 +100,11 @@ triggerModalToSort() {
       return i.category == value;
       
     }
-<<<<<<< HEAD
     const filtered = jsonPicker.itemList.filter(checkFun);
     this.setState(() => {
       return {
         arrayList: filtered,
         filterModalDisplay: false
-=======
-    var filtered = abc.itemList.filter(checkFun);
-    this.setState(prevState => {
-      return {
-        abcd: filtered,
-        disp:false
->>>>>>> 22de0447f9937ab4bf9860c97b60e9bd5d306346
       }
     });
   }
@@ -216,6 +157,7 @@ triggerModalToSort() {
               onPressingValue={(value) => this.setState({ filterModalDisplay: value })}
               male={this.filterMale}
               female={this.filterFemale}
+              noFilter={this.noFilter}
             />
           </View>
         </View>
