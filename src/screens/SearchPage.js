@@ -16,7 +16,8 @@ export default class SearchPage extends Component {
   displayTextInput = val => {
     this.setState({
       valueInput: val
-    });
+    }, () => this.searchFilter());
+    
 }
   triggerModal() {
     this.setState(prevState => {
@@ -110,9 +111,8 @@ export default class SearchPage extends Component {
   searchFilter=()=>{
     checkFun = (i) => {
       const value = this.state.valueInput;
-      console.log(i.title, 'i.title');
-      console.log(value, 'value');
-      return i.title == value;
+      var strRegExPattern = value; 
+      return i.title.match(new RegExp(strRegExPattern,'i')) ||i.description.match(new RegExp(strRegExPattern,'i')) 
     }
     const filtered = abc.itemList.filter(checkFun);
     this.setState(() => {
@@ -132,7 +132,7 @@ export default class SearchPage extends Component {
               <TouchableOpacity><Icon name='arrow-left' style={styles.goBack}  onPress={() => this.props.navigation.goBack()}/></TouchableOpacity>
               <View style={styles.search}>
                 <TextInput placeholder='Search a product' style={styles.headerInputsection} onChangeText={this.displayTextInput}/>
-                <Icon name='magnify' style={styles.searchIcon}  onPress={() => this.searchFilter()}/>
+                <Icon name='magnify' style={styles.searchIcon}/>
               </View>
             </View>
           </View>
