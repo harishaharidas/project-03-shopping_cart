@@ -4,13 +4,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ProductComponent from '../Components/ProductComponent';
 import SortModal from '../Modals/SortModal';
 import FilterModal from '../Modals/FilterModel';
-const abc = require('../jsonFiles/product.json')
+const jsonPicker = require('../jsonFiles/product.json')
 
 export default class SearchPage extends Component {
   state = {
-    display: false,
-    disp: false,
-    abcd: abc.itemList,
+    sortModalDisplay: false,
+    filterModalDisplay: false,
+    arrayList: jsonPicker.itemList,
     valueInput: ''
   }
   displayTextInput = val => {
@@ -19,22 +19,22 @@ export default class SearchPage extends Component {
     }, () => this.searchFilter());
     
 }
-  triggerModal() {
-    this.setState(() => {
+triggerModalToSort() {
+    this.setState( () => {
       return {
-        display: true,
+        sortModalDisplay: true,
       }
     });
   }
-  triggerModal2() {
+  triggerModalToFilter() {
     this.setState(() => {
       return {
-        disp: true
+        filterModalDisplay: true
       }
     });
   }
   displayContent = () => {
-    return this.state.abcd.map((data) => {
+    return this.state.arrayList.map((data) => {
       return (
         <ProductComponent
           productThumbnail={data.image}
@@ -48,24 +48,24 @@ export default class SearchPage extends Component {
     });
   }
   lowToHighSort = () => {
-    const priceValue = this.state.abcd.sort((a, b) => {
+    const priceValue = this.state.arrayList.sort((a, b) => {
       return a.price - b.price;
     })
     this.setState(() => {
       return {
-        abcd: priceValue,
-        display: false
+        arrayList: priceValue,
+        sortModalDisplay: false
       }
     });
   }
   highToLowSort = () => {
-    const priceValue = this.state.abcd.sort((a, b) => {
+    const priceValue = this.state.arrayList.sort((a, b) => {
       return b.price - a.price;
     })
     this.setState(() => {
       return {
-        abcd: priceValue,
-        display: false
+        arrayList: priceValue,
+        sortModalDisplay: false
       }
     });
   }
@@ -74,11 +74,11 @@ export default class SearchPage extends Component {
       const value = "Male";
       return i.category == value;
     }
-    const filtered = abc.itemList.filter(checkFun);
+    const filtered = jsonPicker.itemList.filter(checkFun);
     this.setState(() => {
       return {
-        abcd: filtered,
-        disp: false
+        arrayList: filtered,
+        filterModalDisplay: false
       }
     });
   }
@@ -86,11 +86,11 @@ export default class SearchPage extends Component {
     checkFun = (i) => {
       return i;
     }
-    const filtered = abc.itemList.filter(checkFun);
+    const filtered = jsonPicker.itemList.filter(checkFun);
     this.setState(() => {
       return {
-        abcd: filtered,
-        disp: false
+        arrayList: filtered,
+        filterModalDisplay: false
       }
     });
   }
@@ -100,11 +100,11 @@ export default class SearchPage extends Component {
       return i.category == value;
       
     }
-    const filtered = abc.itemList.filter(checkFun);
+    const filtered = jsonPicker.itemList.filter(checkFun);
     this.setState(() => {
       return {
-        abcd: filtered,
-        disp: false
+        arrayList: filtered,
+        filterModalDisplay: false
       }
     });
   }
@@ -114,11 +114,12 @@ export default class SearchPage extends Component {
       var strRegExPattern = value; 
       return i.title.match(new RegExp(strRegExPattern,'i')) ||i.description.match(new RegExp(strRegExPattern,'i')) 
     }
-    const filtered = abc.itemList.filter(checkFun);
+    const filtered = jsonPicker.itemList.filter(checkFun);
     this.setState(() => {
       return {
-        abcd: filtered,
-        disp: false
+        arrayList: filtered,
+        filterModalDisplay: false,
+        sortModalDisplay: false,
       }
     });
 }
@@ -137,23 +138,23 @@ export default class SearchPage extends Component {
             </View>
           </View>
           <View style={styles.contentAlter}>
-            <TouchableOpacity style={styles.sort} onPress={() => this.triggerModal()}>
+            <TouchableOpacity style={styles.sort} onPress={() => this.triggerModalToSort()}>
               <Icon name='sort' style={styles.sortIcon} />
               <Text style={{ color: 'red' }}>Sort</Text>
             </TouchableOpacity>
             <SortModal
-              display={this.state.display}
-              onPressingValue={(value) => this.setState({ display: value })}
+              display={this.state.sortModalDisplay}
+              onPressingValue={(value) => this.setState({ sortModalDisplay: value })}
               lowToHigh={this.lowToHighSort}
               highToLow={this.highToLowSort}
             />
-            <TouchableOpacity style={styles.filter} onPress={() => this.triggerModal2()} >
+            <TouchableOpacity style={styles.filter} onPress={() => this.triggerModalToFilter()} >
               <Icon name='filter-outline' style={styles.filterIcon} />
               <Text style={{ color: 'red' }}>Filter</Text>
             </TouchableOpacity>
             <FilterModal
-              display={this.state.disp}
-              onPressingValue={(value) => this.setState({ disp: value })}
+              display={this.state.filterModalDisplay}
+              onPressingValue={(value) => this.setState({ filterModalDisplay: value })}
               male={this.filterMale}
               female={this.filterFemale}
               noFilter={this.noFilter}
