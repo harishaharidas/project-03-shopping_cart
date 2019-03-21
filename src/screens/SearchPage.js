@@ -20,14 +20,14 @@ export default class SearchPage extends Component {
     
 }
   triggerModal() {
-    this.setState(prevState => {
+    this.setState(() => {
       return {
         display: true,
       }
     });
   }
   triggerModal2() {
-    this.setState(prevState => {
+    this.setState(() => {
       return {
         disp: true
       }
